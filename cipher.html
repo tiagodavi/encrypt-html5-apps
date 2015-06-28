@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cipher <tiago.asp.net@gmail.com></title>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+	<div>Content of Cipher: <span id="cipher"></span></div>
+	<div>Result: <span id="result"></span></div>
+	<script>
+		$(function(){
+			function encrypt(str,key){
+	            var xor = "";
+	            for (var i = 0; i < str.length; ++i) {
+	                tmp = str[i];
+	                for(var j = 0; j < key.length; ++j) {
+	                    tmp = String.fromCharCode(tmp.charCodeAt(0) ^ key.charCodeAt(j));
+	                }
+	                xor += tmp;
+	            }
+	            return xor;
+	        }
+	        var key = "Mateus7:1-29";
+	        var content = encrypt("email:tiago.asp.net@gmail.com|password:123@|param1:foo|param2:bar|param3:something", key);
+	   		$.post("cipher.php", {"content":content},function(data){
+	   			$("#cipher").html(content);
+	  			$("#result").html(data);
+			});
+		});		
+	</script>
+</body>
+</html>
